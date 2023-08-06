@@ -13,11 +13,11 @@ Test OK : Arduino DUE,Arduino mega2560,Arduino UNO Board
     OLED   =>    Arduino
   *1. GND    ->    GND
   *2. VCC    ->    3.3
-  *3. SCL    ->    SCK
-  *4. SDA    ->    MOSI
-  *5. RES    ->    8 
-  *6. DC     ->    9
-  *7. CS     ->    10
+  *3. SCL    ->    2
+  *4. SDA    ->    1
+  *5. RES    ->    3
+  *6. DC     ->    4
+  *7. CS     ->    10K TO GND
 */
 
 
@@ -40,8 +40,8 @@ void loop() {
 ////command(0x0F);
   er_oled_display();
 
-  delay(1000);  
-  command(0xa7);//--set Negative display 
-  delay(1000);
-  command(0xa6);//--set normal display
+//  delay(1000);  
+//  command(0xa7);//--set Negative display 
+//  delay(1000);
+//  command(0xa6);//--set normal display
 }

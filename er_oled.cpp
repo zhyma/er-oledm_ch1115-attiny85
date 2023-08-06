@@ -51,7 +51,8 @@ void er_oled_begin()
     command(0xB0); /*set page address*/ 
     command(0x40); /*set display start lines*/ 
     command(0x81); /*contract control*/ 
-    command(0x80); /*4d*/ 
+//    command(0x80); /*4d*/ 
+    command(0x00); /*4d*/ 
     command(0x82); /* iref resistor set and adjust ISEG*/ 
     command(0x00); 
     command(0xA0); /*set segment remap 0xA0*/ 
@@ -93,45 +94,4 @@ void er_oled_display()
         SPIWrite(buff, 1);
       }        
   }
-}
-
-void er_oled_fill(uint8_t* buffer)
-{
-  int i;
-  for(i = 0;i < WIDTH * HEIGHT / 8;i++)
-  {
-    buffer[i] = 0xff;
-  }
-}
-
-void er_oled_clear(uint8_t* buffer)
-{
-	int i;
-	for(i = 0;i < WIDTH * HEIGHT / 8;i++)
-	{
-		buffer[i] = 0;
-	}
-}
-
-void er_oled_pixel(int x, int y, char color, uint8_t* buffer)
-{
-    if(x > WIDTH || y > HEIGHT)return ;
-    if(color)
-        buffer[x+(y/8)*WIDTH] |= 1<<(y%8);
-    else
-        buffer[x+(y/8)*WIDTH] &= ~(1<<(y%8));
-}
-
-
-
-void er_oled_bitmap(uint8_t x,uint8_t y,const uint8_t *pBmp, uint8_t chWidth, uint8_t chHeight, uint8_t* buffer)
-{
-	uint8_t i, j, byteWidth = (chWidth + 7)/8;
-	for(j = 0;j < chHeight;j++){
-		for(i = 0;i <chWidth;i++){
-			if(pgm_read_byte(pBmp + j * byteWidth + i / 8) & (128 >> (i & 7))){
-				er_oled_pixel(x + i,y + j, 1, buffer);
-			}
-		}
-	}		
 }

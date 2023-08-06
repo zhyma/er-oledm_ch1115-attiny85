@@ -26,13 +26,6 @@ EastRising Technology Co.,LTD
 void er_oled_begin();
 //void er_oled_display(uint8_t* buffer);
 void er_oled_display();
-void er_oled_clear(uint8_t* buffer);
-void er_oled_fill(uint8_t* buffer);
-void er_oled_pixel(int x,int y,char color, uint8_t* buffer);
-void er_oled_bitmap(uint8_t x,uint8_t y,const uint8_t *pBmp, uint8_t chWidth, uint8_t chHeight, uint8_t* buffer);
-void er_oled_char1616(uint8_t x,uint8_t y,uint8_t chChar, uint8_t* buffer);
-void er_oled_char3216(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer);
-void er_oled_string(uint8_t x, uint8_t y, const char *pString, uint8_t Size, uint8_t Mode, uint8_t* buffer);
 void SPIWrite(uint8_t *buffer, int bufferLength);
 void command(uint8_t cmd);
 
