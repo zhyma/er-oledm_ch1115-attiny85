@@ -9,6 +9,7 @@ EastRising Technology Co.,LTD
 
 void command(uint8_t cmd){
     digitalWrite(OLED_DC, LOW);
+//    delay(10);
     SPIWrite(&cmd, 1);
     digitalWrite(OLED_DC, HIGH);
 }
@@ -79,7 +80,7 @@ void er_oled_begin()
 void er_oled_display()
 {   
   uint8_t page,i;   
-  uint8_t buff = {0xff};
+  uint8_t buff = {0x0f};
   for (page = 0; page < PAGES; page++) {         
       command(0xB0 + page);/* set page address */     
       command(0x00);   /* set low column address */      

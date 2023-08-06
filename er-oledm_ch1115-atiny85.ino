@@ -30,13 +30,18 @@ uint8_t oled_buf[WIDTH * HEIGHT / 8];
 void setup() {
   er_oled_begin();
   delay(3000);
-  command(0xa7);
-  delay(3000);
+//  command(0xa7);
+//  delay(3000);
 }
 
 void loop() {
-delay(100);
-//  SPI.transfer(0x0f);
-//command(0x0F);
+//delay(100);
+////  SPI.transfer(0x0f);
+////command(0x0F);
   er_oled_display();
+
+  delay(1000);  
+  command(0xa7);//--set Negative display 
+  delay(1000);
+  command(0xa6);//--set normal display
 }
