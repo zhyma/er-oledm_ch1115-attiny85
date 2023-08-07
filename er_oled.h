@@ -57,6 +57,6 @@ class ErOLED {
     void setCursorXY(byte X, byte Y);
 };
 
-extern ErOLED ErOled;
+extern ErOLED oled;
 
 #endif

@@ -31,14 +31,14 @@ Test OK : Arduino DUE,Arduino mega2560,Arduino UNO Board
 uint8_t oled_buf[WIDTH * HEIGHT / 8];
 
 void setup() {
-  ErOled.init();
+  oled.init();
   delay(100);
-  ErOled.drawBitmap(NULL, 0, 0, 128, 8);
+  oled.drawBitmap(NULL, 0, 0, 128, 8);
   delay(100);
 }
 
 void loop() {
-//  ErOled.drawBitmap(lick_0, 36, 2, 56, 1);
+//  oled.drawBitmap(lick_0, 36, 2, 56, 1);
 //
 //  delay(3000);
   uint8_t countDown = 200;

@@ -76,4 +76,4 @@ void ErOLED::drawBitmap(const byte *bitmap, byte X, byte Y, uint8_t w, uint8_t h
   }
 }
 
-ErOLED ErOled;  // Preinstantiate Objects
+ErOLED oled;  // Preinstantiate Objects
