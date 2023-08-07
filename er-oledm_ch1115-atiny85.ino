@@ -25,23 +25,34 @@ Test OK : Arduino DUE,Arduino mega2560,Arduino UNO Board
 //#include <SPI.h>
 #include "er_oled.h"
 
+#include "animation.h"
+#include "bitmap.h"
+
 uint8_t oled_buf[WIDTH * HEIGHT / 8];
 
 void setup() {
-  er_oled_begin();
-  delay(3000);
-//  command(0xa7);
-//  delay(3000);
+  ErOled.init();
+  delay(100);
+  ErOled.drawBitmap(NULL, 0, 0, 128, 8);
+  delay(100);
 }
 
 void loop() {
-//delay(100);
-////  SPI.transfer(0x0f);
-////command(0x0F);
-  er_oled_display();
-
-//  delay(1000);  
-//  command(0xa7);//--set Negative display 
-//  delay(1000);
-//  command(0xa6);//--set normal display
+//  ErOled.drawBitmap(lick_0, 36, 2, 56, 1);
+//
+//  delay(3000);
+  uint8_t countDown = 200;
+  lick_init();
+  while(countDown > 0){
+    lick_loop(countDown);
+    countDown -= 1;
+  }
+  
+  countDown = 200;
+  sweating_init();
+  while(countDown > 0){
+    sweating_loop(countDown);
+    countDown -= 1;
+  }
+  
 }

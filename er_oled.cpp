@@ -6,14 +6,15 @@ EastRising Technology Co.,LTD
 #include "er_oled.h"
 
 #include <Arduino.h>
+#include <avr/pgmspace.h>
 
-void sendCommand(uint8_t cmd){
+void ErOLED::sendCommand(uint8_t cmd){
   digitalWrite(OLED_DC, LOW);
   SPIWrite(cmd);
   digitalWrite(OLED_DC, HIGH);
 }
 
-void SPIWrite(uint8_t data) {
+void ErOLED::SPIWrite(uint8_t data) {
   #ifdef _software_SPI
     shiftOut(OLED_SDA, OLED_SCL, MSBFIRST, data);
   #else
@@ -21,7 +22,7 @@ void SPIWrite(uint8_t data) {
   #endif
 }
 
-void er_oled_begin()
+void ErOLED::init()
 {
     #ifdef _software_SPI
     pinMode(OLED_SDA, OUTPUT);
@@ -49,23 +50,30 @@ void er_oled_begin()
     delay(100);
 }
 
-void er_oled_display()
+
+void ErOLED::setCursorXY(byte X, byte Y){
+  // Y up to down,    unit: 1 page (8 pixels)
+  // X left to right, unit: 1 seg  (1 pixel)
+    sendCommand(0xB0 + Y);/* set page address */     
+    sendCommand(0x00 + (X & 0x0F));   /* set low column address */      
+    sendCommand(0x10 + ((X>>4)&0x0F));  /* set high column address */    
+}
+
+void ErOLED::drawBitmap(const byte *bitmap, byte X, byte Y, uint8_t w, uint8_t h)
 {   
-  uint8_t page,i;   
-  uint8_t buff = 0x01;
-  for (page = 0; page < PAGES; page++) {         
-      sendCommand(0xB0 + page);/* set page address */     
-      sendCommand(0x00);   /* set low column address */      
-      sendCommand(0x10);  /* set high column address */      
-      //digitalWrite(OLED_DC, HIGH);
-      //SPIWrite(pBuf, WIDTH); /* write data  one page*/
-      //pBuf += WIDTH;        
-      for(i = 0; i< WIDTH; i++ ) {
-        digitalWrite(OLED_DC, HIGH);
-        buff = buff << 1;
-        if (buff==0)
-          buff = 0x01;
-        SPIWrite(buff);
-      }        
+  uint8_t i,j;
+  setCursorXY(X, Y);
+  digitalWrite(OLED_DC, HIGH);
+  for (i = 0; i < h; i++) {         
+          
+      for(j = 0; j< w; j++ ) {
+        if (bitmap==NULL)
+          SPIWrite(0); // clear area
+        else
+          SPIWrite(pgm_read_byte(&bitmap[i*w+j]));
+      }
+      setCursorXY(X, ++Y);
   }
 }
+
+ErOLED ErOled;  // Preinstantiate Objects

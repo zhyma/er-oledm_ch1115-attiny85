@@ -6,6 +6,7 @@ EastRising Technology Co.,LTD
 #ifndef _er_oled_H_
 #define _er_oled_H_
 
+#include <Arduino.h>
 #include <avr/pgmspace.h>
 
 //#define _software_SPI
@@ -46,11 +47,16 @@ const uint8_t OLED_INIT_CMD[] PROGMEM = {
   0xAF
 };
 
-void er_oled_begin();
-//void er_oled_display(uint8_t* buffer);
-void er_oled_display();
-void SPIWrite(uint8_t data);
-void sendCommand(uint8_t cmd);
+class ErOLED {
+  public:
+    void init();
+    //void er_oled_display(uint8_t* buffer);
+    void SPIWrite(uint8_t data);
+    void sendCommand(uint8_t cmd);
+    void drawBitmap(const byte *bitmap, byte X, byte Y, uint8_t w, uint8_t h);
+    void setCursorXY(byte X, byte Y);
+};
 
+extern ErOLED ErOled;
 
 #endif
