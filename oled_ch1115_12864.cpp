@@ -3,7 +3,7 @@
 EastRising Technology Co.,LTD
 ****************************************************/
 #include "tinySPI.h"
-#include "er_oled.h"
+#include "oled_ch1115_12864.h"
 
 #include <Arduino.h>
 #include <avr/pgmspace.h>

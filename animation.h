@@ -5,7 +5,7 @@
 #ifndef animation_h
 #define animation_h
 
-#include "er_oled.h"
+#include "oled_ch1115_12864.h"
 //#include "TrueRandom.h"
 #include "bitmap.h"
 

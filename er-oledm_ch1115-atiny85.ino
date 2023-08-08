@@ -23,7 +23,7 @@ Test OK : Arduino DUE,Arduino mega2560,Arduino UNO Board
 
 #include "tinySPI.h"
 //#include <SPI.h>
-#include "er_oled.h"
+#include "oled_ch1115_12864.h"
 
 #include "animation.h"
 #include "bitmap.h"
@@ -48,7 +48,7 @@ void loop() {
     countDown -= 1;
   }
   
-  countDown = 200;
+  countDown = 50;
   sweating_init();
   while(countDown > 0){
     sweating_loop(countDown);

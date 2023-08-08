@@ -3,8 +3,8 @@
 EastRising Technology Co.,LTD
 ****************************************************/
   
-#ifndef _er_oled_H_
-#define _er_oled_H_
+#ifndef _oled_ch1115_12864_H_
+#define _oled_ch1115_12864_H_
 
 #include <Arduino.h>
 #include <avr/pgmspace.h>
